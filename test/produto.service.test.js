@@ -52,4 +52,11 @@ describe.only('Teste integração produtos', () => {
 
         expect(res.status).toBe(405)
     })
+
+    test('Should returns status 405', async () => {
+        const res = await request(app)
+                        .get('/produtos')
+
+        expect(res.status).toBe(200)
+    })
 })

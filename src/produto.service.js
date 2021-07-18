@@ -28,7 +28,12 @@ const update = async (produto) => {
     })
 }
 
+const findAll = async () => {
+    return await db.produto.findAll({})
+}
+
 module.exports = {
     create,
-    update
+    update,
+    findAll
 }

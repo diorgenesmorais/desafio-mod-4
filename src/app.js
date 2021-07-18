@@ -78,4 +78,9 @@ app.put('/produtos',
   }
 )
 
+app.get('/produtos', async (req, res) => {
+  const result = await produtoService.findAll()
+  res.status(200).json(result)
+})
+
 module.exports = app
