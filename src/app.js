@@ -44,15 +44,33 @@ app.post('/produtos',
   check('descricao', 'A descrição deve ser informada').notEmpty(),
   check('preco', 'O preço deve ser um número').notEmpty().isFloat(),
   async (req, res) => {
+    const erros = validationResult(req)
+    if (!erros.isEmpty()) {
+      return res.status(400).json({ erro: erros.array() })
+    }
     try {
-      const erros = validationResult(req)
-      if (!erros.isEmpty()) {
-        return res.status(400).json({ erro: erros.array() })
-      }
       const result = await produtoService.create(req.body)
       res.status(201).json(result)
     } catch (error) {
-      return res.json({ erro: error.message })
+      res.json({ erro: error.message })
+    }
+  }
+)
+
+app.put('/produtos',
+  check('codigo', 'O código deve ser informado').notEmpty(),
+  check('descricao', 'A descrição deve ser informada').notEmpty(),
+  check('preco', 'O preço deve ser um número').notEmpty().isFloat(),
+  async (req, res) => {
+    const erros = validationResult(req)
+    if (!erros.isEmpty()) {
+      return res.status(400).json({ erro: erros.array() })
+    }
+    try {
+      const result = await produtoService.update(req.body)
+      res.status(200).json(result)
+    } catch (error) {
+      res.json({ erro: error.message })
     }
   }
 )

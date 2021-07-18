@@ -20,8 +20,8 @@ const create = async (produto) => {
 }
 
 const update = async (produto) => {
-    const { codigo, descricao, preco } = produto
-    return await db.produto.update({ descricao, preco },{
+    const { codigo } = produto
+    return await db.produto.update(produto, {
         where: {
             codigo
         }
