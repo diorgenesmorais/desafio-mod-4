@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../src/app.js')
 const db = require('../src/db')
 
-describe('Testes de Integração', () => {
+describe.skip('Testes de Integração', () => {
   beforeEach(async () => {
     await db.cliente.destroy({ where: {} })
     await db.consulta.destroy({ where: {} })

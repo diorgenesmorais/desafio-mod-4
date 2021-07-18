@@ -2,8 +2,8 @@ const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize({
   dialect: 'postgres',
-  host: 'db',
-  port: 5432,
+  host: 'localhost',
+  port: 9016,
   database: 'consulta_credito',
   username: 'postgres',
   password: 'mysecretpassword',
@@ -13,7 +13,7 @@ const sequelize = new Sequelize({
 const produtoModel = (sequelize, DataTypes) => {
   const produto = sequelize.define('produtos', {
     codigo: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       unique: true

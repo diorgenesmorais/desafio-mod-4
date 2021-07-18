@@ -4,6 +4,7 @@ const app = express()
 const { check, validationResult } = require('express-validator')
 
 const consultaCliente = require('./consulta-cliente')
+const produtoService = require('./produto.service')
 
 app.use(express.json())
 
@@ -34,6 +35,20 @@ app.post('/consulta-credito',
       res.status(201).json(valores)
     } catch (erro) {
       return res.status(405).json({ erro: erro.message })
+    }
+  }
+)
+
+app.post('/produtos',
+  check('codigo', 'O código deve ser informado').notEmpty(),
+  check('descricao', 'A descrição deve ser informada').notEmpty(),
+  check('preco', 'O preço deve ser um número').notEmpty().isFloat(),
+  async (req, res) => {
+    try {
+      const result = await produtoService.create(req.body)
+      res.status(201).json(result)
+    } catch (error) {
+      return res.status(405).json({ erro: error.message })
     }
   }
 )

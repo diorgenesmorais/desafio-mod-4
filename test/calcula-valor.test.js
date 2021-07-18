@@ -1,7 +1,7 @@
 const calculaValor = require('../src/calcula-valor')
 require('./extensoes')
 
-describe('calcularMontante', () => {
+describe.skip('calcularMontante', () => {
   test('Com uma prestação o montante é igual ao capital', () => {
     // Operação
     const montante = calculaValor.calcularMontante(100, 0.0175, 1)
@@ -19,7 +19,7 @@ describe('calcularMontante', () => {
   })
 })
 
-describe('arredondar', () => {
+describe.skip('arredondar', () => {
   test('Arredondar em duas casas decimais', () => {
     const resultado = calculaValor.arredondar(538.4453124999998)
     expect(resultado).toBe(538.45)
@@ -31,7 +31,7 @@ describe('arredondar', () => {
   })
 })
 
-describe('calcularPrestacoes', () => {
+describe.skip('calcularPrestacoes', () => {
   test('O número de parcelas é igual ao número de prestações', () => {
     // Premissas
     const numeroPrestacoes = 6
