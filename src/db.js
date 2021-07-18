@@ -10,6 +10,26 @@ const sequelize = new Sequelize({
   logging: false
 })
 
+const produtoModel = (sequelize, DataTypes) => {
+  const produto = sequelize.define('produtos', {
+    codigo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+      unique: true
+    },
+    descricao: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    preco: {
+      type: DataTypes.DOUBLE,
+      allowNull: false
+    }
+  })
+  return produto
+}
+
 const clienteModel = (sequelize, DataTypes) => {
   const Cliente = sequelize.define('Cliente', {
     CPF: {
@@ -55,6 +75,7 @@ const consultaModel = (sequelize, DataTypes) => {
   return Consulta
 }
 
+const produto = produtoModel(sequelize, Sequelize.DataTypes)
 const cliente = clienteModel(sequelize, Sequelize.DataTypes)
 const consulta = consultaModel(sequelize, Sequelize.DataTypes)
 
@@ -62,6 +83,7 @@ cliente.hasMany(consulta, { as: 'Consultas' })
 consulta.belongsTo(cliente)
 
 module.exports = {
+  produto,
   cliente,
   consulta,
   sequelize
