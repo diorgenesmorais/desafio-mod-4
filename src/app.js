@@ -45,10 +45,14 @@ app.post('/produtos',
   check('preco', 'O preço deve ser um número').notEmpty().isFloat(),
   async (req, res) => {
     try {
+      const erros = validationResult(req)
+      if (!erros.isEmpty()) {
+        return res.status(400).json({ erro: erros.array() })
+      }
       const result = await produtoService.create(req.body)
       res.status(201).json(result)
     } catch (error) {
-      return res.status(405).json({ erro: error.message })
+      return res.json({ erro: error.message })
     }
   }
 )

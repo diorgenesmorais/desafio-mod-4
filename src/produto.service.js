@@ -20,7 +20,12 @@ const create = async (produto) => {
 }
 
 const update = async (produto) => {
-    console.log(produto)
+    const { codigo, descricao, preco } = produto
+    return await db.produto.update({ descricao, preco },{
+        where: {
+            codigo
+        }
+    })
 }
 
 module.exports = {

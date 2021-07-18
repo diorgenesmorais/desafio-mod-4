@@ -8,15 +8,31 @@ describe.only('Teste integração produtos', () => {
 
     const payloadRequest = {
         codigo: 1,
-        descricao: 'Banana',
+        descricao: 'Banana comprida',
         preco: 3.5
     }
 
-    test('Should create product if not exists', async () => {
+    test.skip('Should create product if not exists', async () => {
         const res = await request(app)
                         .post('/produtos')
                         .send(payloadRequest)
         
         expect(res.status).toBe(201)
+    })
+
+    test('Should update product if exists', async () => {
+        const res = await request(app)
+                        .post('/produtos')
+                        .send(payloadRequest)
+        
+        expect(res.status).toBe(200)
+    })
+
+    test('Should returns status 400', async () => {
+        const res = await request(app)
+                        .post('/produtos')
+                        .send({ codigo: 2, preco: 6.8 })
+
+        expect(res.status).toBe(400)
     })
 })
