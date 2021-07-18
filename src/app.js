@@ -67,10 +67,13 @@ app.put('/produtos',
       return res.status(400).json({ erro: erros.array() })
     }
     try {
-      const result = await produtoService.update(req.body)
+      const [result] = await produtoService.update(req.body)
+      if (result === 0) {
+        return res.status(405).send()
+      }
       res.status(200).json(result)
     } catch (error) {
-      res.json({ erro: error.message })
+      res.status(405).json({ erro: error.message })
     }
   }
 )

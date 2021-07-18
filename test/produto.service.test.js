@@ -44,4 +44,12 @@ describe.only('Teste integração produtos', () => {
 
         expect(res.status).toBe(400)
     })
+
+    test('Should returns status 405', async () => {
+        const res = await request(app)
+                        .put('/produtos')
+                        .send({ codigo: 2, descricao: 'Banana', preco: 6.8 })
+
+        expect(res.status).toBe(405)
+    })
 })
