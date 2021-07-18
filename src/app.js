@@ -83,4 +83,10 @@ app.get('/produtos', async (req, res) => {
   res.status(200).json(result)
 })
 
+app.delete('/produtos/:codigo', async (req, res) => {
+  const result = await produtoService.destroy(req.params.codigo)
+  const statusCode = result ? 200 : 405
+  res.status(statusCode).end()
+})
+
 module.exports = app

@@ -32,8 +32,17 @@ const findAll = async () => {
     return await db.produto.findAll({})
 }
 
+const destroy = async (codigo) => {
+    return await db.produto.destroy({
+        where: {
+            codigo
+        }
+    })
+}
+
 module.exports = {
     create,
     update,
-    findAll
+    findAll,
+    destroy
 }

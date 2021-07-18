@@ -12,7 +12,7 @@ describe.only('Teste integração produtos', () => {
         preco: 3.5
     }
 
-    test.skip('Should create product if not exists', async () => {
+    test('Should create product if not exists', async () => {
         const res = await request(app)
                         .post('/produtos')
                         .send(payloadRequest)
@@ -53,9 +53,16 @@ describe.only('Teste integração produtos', () => {
         expect(res.status).toBe(405)
     })
 
-    test('Should returns status 405', async () => {
+    test('Should get all and returns status 200', async () => {
         const res = await request(app)
                         .get('/produtos')
+
+        expect(res.status).toBe(200)
+    })
+
+    test('Should delete and returns status 200', async () => {
+        const res = await request(app)
+                        .delete('/produtos/1')
 
         expect(res.status).toBe(200)
     })
